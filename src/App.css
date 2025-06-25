@@ -1,0 +1,18 @@
+:root {
+    --neutral-50: #fefeff;
+    --neutral-900: #000101;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: var(--neutral-50);
+    background-color: var(--neutral-900);
+    min-height: 100dvh;
+}
