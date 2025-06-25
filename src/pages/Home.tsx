@@ -26,7 +26,7 @@ const Home = () => {
         customersServedPerDay,
         totalDailyRevenue,
         dailyNetProfit,
-    } = useQueueingSystemMMm(
+    } = useQueueingSystemMMm({
         customerArrivalRate,
         serviceRatePerCashier,
         numberOfCashiers,
@@ -34,8 +34,8 @@ const Home = () => {
         costPerCashierPerHour,
         waitingCostPerCustomerPerHour,
         averageSpendingPerPurchase,
-        profitMarginPerSale
-    );
+        profitMarginPerSale,
+    });
 
     return (
         <>

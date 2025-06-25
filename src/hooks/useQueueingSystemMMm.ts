@@ -1,13 +1,15 @@
-export const useQueueingSystemMMm = (
-    customerArrivalRate: number,
-    serviceRatePerCashier: number,
-    numberOfCashiers: number,
-    dailyWorkingHours: number,
-    costPerCashierPerHour: number,
-    waitingCostPerCustomerPerHour: number,
-    averageSpendingPerPurchase: number,
-    profitMarginPerSale: number
-) => {
+import type { QueueingSystemMMm } from "../types/QueueingSystemMMm";
+
+export const useQueueingSystemMMm = ({
+    customerArrivalRate,
+    serviceRatePerCashier,
+    numberOfCashiers,
+    dailyWorkingHours,
+    costPerCashierPerHour,
+    waitingCostPerCustomerPerHour,
+    averageSpendingPerPurchase,
+    profitMarginPerSale,
+}: QueueingSystemMMm) => {
     // Formula: ρ = λ / (m * μ)
     const systemUtilizationRate = customerArrivalRate / (numberOfCashiers * serviceRatePerCashier);
 
