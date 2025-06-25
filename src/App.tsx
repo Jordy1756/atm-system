@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQueueingSystemMMm } from "./hooks/useQueueingSystemMMm";
 
 export default function QueueingModelMMM() {
+    // NOTA: λ < μ
     const [customerArrivalRate, setCustomerArrivalRate] = useState(20); // λ: Customers arriving per hour
     const [serviceRatePerCashier, setServiceRatePerCashier] = useState(30); // μ: Customers served by each cashier per hour
     const [numberOfCashiers, setNumberOfCashiers] = useState(2); // m: Number of cashiers (servers)
