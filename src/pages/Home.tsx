@@ -192,6 +192,7 @@ const Home = () => {
                     />
                 </div>
             </div>
+
             <div>
                 <div>
                     <h3>Métricas del Sistema por Número de Cajeros</h3>
