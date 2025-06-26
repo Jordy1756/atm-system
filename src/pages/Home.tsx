@@ -4,6 +4,7 @@ import Layout from "../layouts/Layout";
 import { useCashier } from "../hooks/useCashier";
 import CashierServiceSettings from "../components/CashierServiceSettings";
 import { calculateQueueingMetrics } from "../utils/handleQueueingMetrics";
+import "./index.css";
 
 const Home = () => {
     const {
@@ -147,16 +148,25 @@ const Home = () => {
 
     return (
         <Layout>
-            <CashierServiceSettings />
-            <div>
-                <div>
-                    <h3>Métricas del Sistema por Número de Cajeros</h3>
-                    <div ref={lineChartRef} />
-                </div>
-                <div>
-                    <h3>Análisis de Costos y Ganancias</h3>
-                    <div ref={areaChartRef} />
-                </div>
+            <div className="dashboard-container">
+                <aside className="dashboard-sidebar">
+                    <div className="fix">
+                        <CashierServiceSettings />
+                    </div>
+                </aside>
+
+                <main className="dashboard-main">
+                    <div className="dashboard-charts">
+                        <div>
+                            <h3>Métricas del Sistema por Número de Cajeros</h3>
+                            <div ref={lineChartRef} style={{ width: "600px", height: "400px" }} />
+                        </div>
+                        <div>
+                            <h3>Análisis de Costos y Ganancias</h3>
+                            <div ref={areaChartRef} style={{ width: "600px", height: "400px" }} />
+                        </div>
+                    </div>
+                </main>
             </div>
         </Layout>
     );

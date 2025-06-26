@@ -1,0 +1,71 @@
+/* index.css */
+.input-container {
+    max-width: 320px;
+    margin: 1rem auto;
+    font-family: Arial, sans-serif;
+}
+
+.input-label {
+    display: block;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: white;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.input-range {
+    flex-grow: 1;
+    height: 6px;
+    border-radius: 4px;
+    appearance: none;
+    background-color: #ddd;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Estilo para el "thumb" del slider (Chrome, Edge, Safari) */
+.input-range::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #4f46e5; /* color azul */
+    cursor: pointer;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease;
+    border: none;
+    margin-top: -6px; /* Centra verticalmente el thumb */
+}
+
+/* Estilo para el "thumb" en Firefox */
+.input-range::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #4f46e5;
+    cursor: pointer;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+/* Cambia el color del thumb al hacer hover */
+.input-range:hover::-webkit-slider-thumb {
+    background-color: #3730a3;
+}
+.input-range:hover::-moz-range-thumb {
+    background-color: #3730a3;
+}
+
+.input-value {
+    width: 40px;
+    text-align: center;
+    font-weight: 600;
+    color: #222;
+}
