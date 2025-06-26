@@ -1,4 +1,4 @@
-export interface QueueingSystemMMm {
+export interface QueueingMetrics {
     customerArrivalRate: number;
     serviceRatePerCashier: number;
     numberOfCashiers: number;

@@ -1,44 +1,50 @@
-import { useCashier } from "./useCashier";
+import type { QueueingMetrics } from "../types/QueueingMetrics";
 
-export const useQueueingSystemMMm = () => {
-    const {
-        customerArrivalRate,
-        serviceRatePerCashier,
-        numberOfCashiers,
-        dailyWorkingHours,
-        costPerCashierPerHour,
-        waitingCostPerCustomerPerHour,
-        averageSpendingPerPurchase,
-        profitMarginPerSale,
-    } = useCashier();
+const calculateFactorial = (num: number): number => (num <= 1 ? 1 : num * calculateFactorial(num - 1));
 
+const calculateEmptySystemProbability = (
+    customerArrivalRate: number,
+    serviceRatePerCashier: number,
+    numberOfCashiers: number,
+    systemUtilizationRate: number
+): number => {
+    // Formula: P₀ = [Σ (n=0 to m-1) (λ/μ)^n / n! + (λ/μ)^m / (m! * (1 - ρ))]^-1
+    let sum = 0;
+    for (let n = 0; n < numberOfCashiers; n++) {
+        sum += Math.pow(customerArrivalRate / serviceRatePerCashier, n) / calculateFactorial(n);
+    }
+    const finalPart =
+        Math.pow(customerArrivalRate / serviceRatePerCashier, numberOfCashiers) /
+        (calculateFactorial(numberOfCashiers) * (1 - systemUtilizationRate));
+    return 1 / (sum + finalPart);
+};
+
+export const calculateQueueingMetrics = ({
+    customerArrivalRate,
+    serviceRatePerCashier,
+    numberOfCashiers,
+    dailyWorkingHours,
+    costPerCashierPerHour,
+    waitingCostPerCustomerPerHour,
+    averageSpendingPerPurchase,
+    profitMarginPerSale,
+}: QueueingMetrics) => {
     // Formula: ρ = λ / (m * μ)
     const systemUtilizationRate = customerArrivalRate / (numberOfCashiers * serviceRatePerCashier);
 
-    function factorial(n: number): number {
-        return n <= 1 ? 1 : n * factorial(n - 1);
-    }
-
-    function calculateEmptySystemProbability(): number {
-        // Formula: P₀ = [Σ (n=0 to m-1) (λ/μ)^n / n! + (λ/μ)^m / (m! * (1 - ρ))]^-1
-        let sum = 0;
-        for (let n = 0; n < numberOfCashiers; n++) {
-            sum += Math.pow(customerArrivalRate / serviceRatePerCashier, n) / factorial(n);
-        }
-        const finalPart =
-            Math.pow(customerArrivalRate / serviceRatePerCashier, numberOfCashiers) /
-            (factorial(numberOfCashiers) * (1 - systemUtilizationRate));
-        return 1 / (sum + finalPart);
-    }
-
-    const emptySystemProbability = calculateEmptySystemProbability();
+    const emptySystemProbability = calculateEmptySystemProbability(
+        customerArrivalRate,
+        serviceRatePerCashier,
+        numberOfCashiers,
+        systemUtilizationRate
+    );
 
     // Formula: Lq = P₀ * (λ/μ)^m * ρ / (m! * (1 - ρ)^2)
     const averageCustomersInQueue =
         (emptySystemProbability *
             Math.pow(customerArrivalRate / serviceRatePerCashier, numberOfCashiers) *
             systemUtilizationRate) /
-        (factorial(numberOfCashiers) * Math.pow(1 - systemUtilizationRate, 2));
+        (calculateFactorial(numberOfCashiers) * Math.pow(1 - systemUtilizationRate, 2));
 
     // Formula: L = Lq + λ/μ
     const averageCustomersInSystem = averageCustomersInQueue + customerArrivalRate / serviceRatePerCashier;

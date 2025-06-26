@@ -1,14 +1,13 @@
 import { useEffect, useRef } from "react";
-import { useQueueingSystemMMm } from "../hooks/useQueueingSystemMMm";
 import { createChart, ColorType, LineSeries, AreaSeries } from "lightweight-charts";
 import Layout from "../layouts/Layout";
 import { useCashier } from "../hooks/useCashier";
 import CashierServiceSettings from "../components/CashierServiceSettings";
+import { calculateQueueingMetrics } from "../utils/handleQueueingMetrics";
 
 const Home = () => {
     const {
         serviceRatePerCashier,
-        numberOfCashiers,
         dailyWorkingHours,
         costPerCashierPerHour,
         waitingCostPerCustomerPerHour,
@@ -19,14 +18,24 @@ const Home = () => {
 
     const lineChartRef = useRef<HTMLDivElement>(null);
     const areaChartRef = useRef<HTMLDivElement>(null);
-    const result = useQueueingSystemMMm();
 
     const generateDataForCashiers = () => {
         const data = [];
         for (let cashiers = 1; cashiers <= 8; cashiers++) {
+            const result = calculateQueueingMetrics({
+                customerArrivalRate,
+                serviceRatePerCashier,
+                numberOfCashiers: cashiers,
+                dailyWorkingHours,
+                costPerCashierPerHour,
+                waitingCostPerCustomerPerHour,
+                averageSpendingPerPurchase,
+                profitMarginPerSale,
+            });
+
             data.push({
                 cashiers: cashiers,
-                waitingTime: result.averageWaitingTimeInQueue * 60, // Convert to minutes
+                waitingTime: result.averageWaitingTimeInQueue * 60,
                 customersInQueue: result.averageCustomersInQueue,
                 utilization: result.systemUtilizationRate * 100,
                 totalCost: result.totalSystemCost,
@@ -42,6 +51,7 @@ const Home = () => {
         if (!lineChartRef.current || !areaChartRef.current) return;
 
         const data = generateDataForCashiers();
+        console.log(data);
 
         // Line Chart - System Metrics
         const lineChart = createChart(lineChartRef.current, {
@@ -54,6 +64,13 @@ const Home = () => {
             grid: {
                 vertLines: { color: "#333" },
                 horzLines: { color: "#333" },
+            },
+        });
+
+        lineChart.applyOptions({
+            timeScale: {
+                timeVisible: false,
+                tickMarkFormatter: (time: any) => `${time} cajero${time > 1 ? "s" : ""}`,
             },
         });
 
