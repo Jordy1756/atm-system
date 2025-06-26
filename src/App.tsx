@@ -1,12 +1,12 @@
 import "./App.css";
-import { CashierContext } from "./context/CashierContext";
+import { CashierProvider } from "./context/CashierContext";
 import Home from "./pages/Home";
 
 const App = () => {
     return (
-        <CashierContext.Provider value={undefined}>
+        <CashierProvider>
             <Home />
-        </CashierContext.Provider>
+        </CashierProvider>
     );
 };
 
