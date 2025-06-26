@@ -1,7 +1,7 @@
 import Layout from "../layouts/Layout";
 import CashierServiceSettings from "../components/CashierServiceSettings";
-import Chart from "../components/Chart";
-import "./index.css"
+import CashierPerformanceChart from "../components/CashierPerformanceChart";
+import "./index.css";
 
 const Home = () => {
     return (
@@ -14,7 +14,7 @@ const Home = () => {
                 </aside>
                 <main className="dashboard-main">
                     <div className="dashboard-charts">
-                        <Chart />
+                        <CashierPerformanceChart />
                     </div>
                 </main>
             </div>

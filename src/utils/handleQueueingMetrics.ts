@@ -58,12 +58,12 @@ export const calculateQueueingMetrics = ({
     // Costs and profits
     const totalWaitingCost = averageCustomersInQueue * waitingCostPerCustomerPerHour * dailyWorkingHours;
     const totalCashierCost = numberOfCashiers * costPerCashierPerHour * dailyWorkingHours;
-    const totalSystemCost = totalWaitingCost + totalCashierCost;
+    const totalSystemCost = totalWaitingCost + totalCashierCost; //COSTO
 
     const netProfitPerCustomer = averageSpendingPerPurchase * profitMarginPerSale;
     const customersServedPerDay = customerArrivalRate * dailyWorkingHours;
-    const totalDailyRevenue = netProfitPerCustomer * customersServedPerDay;
-    const dailyNetProfit = totalDailyRevenue - totalSystemCost;
+    const totalDailyRevenue = netProfitPerCustomer * customersServedPerDay; // GANANCIA
+    const dailyNetProfit = totalDailyRevenue - totalSystemCost; // ESTOS 2 SON INGRESOS Y COSTOS, LOS DE LA RESTA Y EL RESULTADO ES LA UTILIDAD
 
     return {
         systemUtilizationRate,

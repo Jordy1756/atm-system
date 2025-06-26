@@ -2,12 +2,11 @@ import { useEffect, useRef } from "react";
 import { createChart, ColorType, AreaSeries } from "lightweight-charts";
 import { useCashier } from "../../hooks/useCashier";
 
-const Chart = () => {
+const CashierPerformanceChart = () => {
     const chartRef = useRef<HTMLDivElement>(null);
     const { cashierData } = useCashier();
 
     useEffect(() => {
-        console.log(cashierData);
         if (!chartRef.current) return;
 
         const chart = createChart(chartRef.current, {
@@ -73,7 +72,20 @@ const Chart = () => {
         };
     }, [cashierData]);
 
-    return <div className="prueba" ref={chartRef} />;
+    return (
+        <section>
+            <header>
+                <button>A</button>
+                <button>B</button>
+                <button>C</button>
+                <button>D</button>
+                <button>E</button>
+                <button>F</button>
+                <button>G</button>
+            </header>
+            <div className="prueba" ref={chartRef} />
+        </section>
+    );
 };
 
-export default Chart;
+export default CashierPerformanceChart;
