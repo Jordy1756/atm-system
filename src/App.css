@@ -1,28 +1,222 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+
 :root {
+    --font: "Poppins", "Open Sans", sans-serif, system-ui;
+    --text-size-mega: clamp(2.027rem, 5vw + 1rem, 3.815rem);
+    --text-size-huge: clamp(1.802rem, 4vw + 1rem, 3.052rem);
+    --text-size-xlarge: clamp(1.602rem, 3vw + 1rem, 2.441rem);
+    --text-size-large: clamp(1.424rem, 2.5vw + 1rem, 1.953rem);
+    --text-size-medium: clamp(1.266rem, 2vw + 1rem, 1.563rem);
+    --text-size-small: clamp(1.125rem, 1.5vw + 1rem, 1.25rem);
+    --text-size-base: 1rem;
+    --font-weight-normal: 300;
+    --font-weight-title: 400;
     --neutral-50: #fefeff;
     --neutral-900: #000101;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul,
+summary {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: "";
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a,
+button {
+    cursor: pointer;
+}
+
+button,
+input,
+textarea,
+select {
+    line-height: inherit;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
 }
 
 body {
-    color: var(--neutral-50);
     background-color: var(--neutral-900);
-    min-height: 100dvh;
+    color: var(--neutral-50);
+    font-family: var(--font);
 }
 
-
-.prueba2 {
-    background-color: rebeccapurple;
+:is(h1, h2, h3, h4, h5, h6) {
+    font-weight: var(--font-weight-title);
+    line-height: 1.25;
+    text-wrap: balance;
+    break-after: avoid-page;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-kerning: normal;
+    font-feature-settings: "liga" 1, "dlig" 1, "kern" 1;
 }
 
-.prueba {
-    width: 1000px;
-    height: 500px;
+p,
+blockquote,
+span,
+li {
+    font-weight: var(--font-weight-normal);
+    font-size: var(--text-body-base);
+    line-height: 1.75;
+    text-wrap: pretty;
+    max-width: 65ch;
+    font-kerning: normal;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.root {
+    position: relative;
 }

@@ -1,9 +1,11 @@
 import { useEffect, useRef } from "react";
 import { createChart, ColorType, AreaSeries } from "lightweight-charts";
 import { useCashier } from "../../hooks/useCashier";
+import "./index.css";
 
 const CashierPerformanceChart = () => {
     const chartRef = useRef<HTMLDivElement>(null);
+    const seriesRef = useRef<any>(null);
     const { cashierData } = useCashier();
 
     useEffect(() => {
@@ -25,22 +27,19 @@ const CashierPerformanceChart = () => {
         chart.applyOptions({
             rightPriceScale: {
                 scaleMargins: {
-                    top: 0.3, // leave some space for the legend
+                    top: 0.3,
                     bottom: 0.25,
                 },
             },
             crosshair: {
-                // hide the horizontal crosshair line
                 horzLine: {
                     visible: false,
                     labelVisible: false,
                 },
-                // hide the vertical crosshair label
                 vertLine: {
                     labelVisible: false,
                 },
             },
-            // hide the grid lines
             grid: {
                 vertLines: {
                     visible: false,
@@ -63,6 +62,8 @@ const CashierPerformanceChart = () => {
             crosshairMarkerVisible: false,
         });
 
+        seriesRef.current = series;
+
         chart.timeScale().fitContent();
 
         series.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d.averageWaitingTimeInQueue })));
@@ -72,18 +73,41 @@ const CashierPerformanceChart = () => {
         };
     }, [cashierData]);
 
+    const setAverageWaitingTime = () =>
+        seriesRef.current.setData(
+            cashierData.map((d) => ({ time: d.cashiers as any, value: d.averageWaitingTimeInQueue }))
+        );
+
+    const setAverageCustomersInQueue = () =>
+        seriesRef.current.setData(
+            cashierData.map((d) => ({ time: d.cashiers as any, value: d.averageCustomersInQueue }))
+        );
+
+    const setSystemUtilizationRate = () =>
+        seriesRef.current.setData(
+            cashierData.map((d) => ({ time: d.cashiers as any, value: d.systemUtilizationRate }))
+        );
+
+    const setTotalSystemCost = () =>
+        seriesRef.current.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d.totalSystemCost })));
+
+    const setTotalWaitingCost = () =>
+        seriesRef.current.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d.totalWaitingCost })));
+
+    const setTotalCashierCost = () =>
+        seriesRef.current.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d.totalCashierCost })));
+
     return (
-        <section>
+        <section className="cashier__performance-chart">
             <header>
-                <button>A</button>
-                <button>B</button>
-                <button>C</button>
-                <button>D</button>
-                <button>E</button>
-                <button>F</button>
-                <button>G</button>
+                <button onClick={setAverageWaitingTime}>Tiempo de espera promedio</button>
+                <button onClick={setAverageCustomersInQueue}>Promedio de clientes en cola</button>
+                <button onClick={setSystemUtilizationRate}>Tasa de utilización del sistema</button>
+                <button onClick={setTotalSystemCost}>D</button>
+                <button onClick={setTotalWaitingCost}>E</button>
+                <button onClick={setTotalCashierCost}>F</button>
             </header>
-            <div className="prueba" ref={chartRef} />
+            <div ref={chartRef} />
         </section>
     );
 };

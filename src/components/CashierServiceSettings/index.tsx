@@ -1,5 +1,6 @@
 import { useCashier } from "../../hooks/useCashier";
 import Input from "../Input";
+import "./index.css";
 
 const CashierServiceSettings = () => {
     const {
@@ -22,7 +23,7 @@ const CashierServiceSettings = () => {
     } = useCashier();
 
     return (
-        <section>
+        <section className="cashier__service-settings">
             <Input
                 label={`Tasa de Llegada (λ): ${customerArrivalRate} clientes/hora`}
                 value={customerArrivalRate}

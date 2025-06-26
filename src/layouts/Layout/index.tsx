@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import "./index.css";
 
 type Props = {
     children: ReactNode;
@@ -7,11 +8,10 @@ type Props = {
 const Layout = ({ children }: Props) => {
     return (
         <>
-            <header>
+            <header className="header">
                 <h1>My Application</h1>
             </header>
-            <main>{children}</main>
-            <footer>© 2025 My Application</footer>
+            <main className="main">{children}</main>
         </>
     );
 };
