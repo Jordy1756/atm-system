@@ -88,9 +88,6 @@ const CashierPerformanceChart = () => {
             cashierData.map((d) => ({ time: d.cashiers as any, value: d.systemUtilizationRate }))
         );
 
-    const setTotalSystemCost = () =>
-        seriesRef.current.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d.totalSystemCost })));
-
     const setTotalWaitingCost = () =>
         seriesRef.current.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d.totalWaitingCost })));
 
@@ -103,7 +100,6 @@ const CashierPerformanceChart = () => {
                 <button onClick={setAverageWaitingTime}>Tiempo de espera promedio</button>
                 <button onClick={setAverageCustomersInQueue}>Promedio de clientes en cola</button>
                 <button onClick={setSystemUtilizationRate}>Tasa de utilización del sistema</button>
-                <button onClick={setTotalSystemCost}>D</button>
                 <button onClick={setTotalWaitingCost}>E</button>
                 <button onClick={setTotalCashierCost}>F</button>
             </header>

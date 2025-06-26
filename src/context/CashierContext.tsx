@@ -55,9 +55,10 @@ export const CashierProvider = ({ children }: { children: ReactNode }) => {
                     averageWaitingTimeInQueue: result.averageWaitingTimeInQueue * 60,
                     averageCustomersInQueue: result.averageCustomersInQueue,
                     systemUtilizationRate: result.systemUtilizationRate * 100,
-                    totalSystemCost: result.totalSystemCost,
                     totalWaitingCost: result.totalWaitingCost,
                     totalCashierCost: result.totalCashierCost,
+                    totalSystemCost: result.totalSystemCost,
+                    totalDailyRevenue: result.totalDailyRevenue,
                     dailyNetProfit: result.dailyNetProfit,
                 });
             }
