@@ -27,7 +27,7 @@ const CashierServiceSettings = () => {
                 label={`Tasa de Llegada (λ): ${customerArrivalRate} clientes/hora`}
                 value={customerArrivalRate}
                 min={10}
-                max={50}
+                max={serviceRatePerCashier - 1}
                 onChange={setCustomerArrivalRate}
             />
             <Input
@@ -35,7 +35,10 @@ const CashierServiceSettings = () => {
                 value={serviceRatePerCashier}
                 min={20}
                 max={60}
-                onChange={setServiceRatePerCashier}
+                onChange={(val) => {
+                    if (val > 60 || val <= customerArrivalRate) return;
+                    setServiceRatePerCashier(val);
+                }}
             />
             <Input
                 label={`Número de Cajeros: ${numberOfCashiers}`}
@@ -73,8 +76,8 @@ const CashierServiceSettings = () => {
                 onChange={setAverageSpendingPerPurchase}
             />
             <Input
-                label={`Margen de Ganancia por Venta: ${profitMarginPerSale * 100}%`}
-                value={profitMarginPerSale * 100}
+                label={`Margen de Ganancia por Venta: ${Math.round(profitMarginPerSale * 100)}%`}
+                value={Math.round(profitMarginPerSale * 100)}
                 min={0}
                 max={100}
                 onChange={(value) => setProfitMarginPerSale(value / 100)}
