@@ -1,3 +1,5 @@
+import "./index.css";
+
 type Props = {
     label: string;
     value: number;
@@ -8,9 +10,18 @@ type Props = {
 
 const Input = ({ label, value, min, max, onChange }: Props) => {
     return (
-        <div>
-            <label>{label}</label>
-            <input type="range" min={min} max={max} value={value} onChange={(e) => onChange(+e.target.value)} />
+        <div className="input-container">
+            <label className="input-label">{label}</label>
+            <div className="input-wrapper">
+                <input
+                    type="range"
+                    className="input-range"
+                    min={min}
+                    max={max}
+                    value={value}
+                    onChange={(e) => onChange(+e.target.value)}
+                />
+            </div>
         </div>
     );
 };
