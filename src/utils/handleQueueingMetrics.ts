@@ -1,4 +1,4 @@
-import type { QueueingMetrics } from "../types/QueueingMetrics";
+import type { QueueingMetrics } from "../types/QueueingMetricsTypes";
 
 const calculateFactorial = (num: number): number => (num <= 1 ? 1 : num * calculateFactorial(num - 1));
 
