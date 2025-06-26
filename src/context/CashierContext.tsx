@@ -19,7 +19,6 @@ type CashierContextType = {
     setProfitMarginPerSale: (value: number) => void;
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const CashierContext = createContext<CashierContextType | undefined>(undefined);
 
 export const CashierProvider = ({ children }: { children: ReactNode }) => {

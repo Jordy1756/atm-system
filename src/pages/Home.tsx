@@ -17,23 +17,14 @@ const Home = () => {
         customerArrivalRate,
     } = useCashier();
 
-    const lineChartRef = useRef(null);
-    const areaChartRef = useRef(null);
+    const lineChartRef = useRef<HTMLDivElement>(null);
+    const areaChartRef = useRef<HTMLDivElement>(null);
 
     const generateDataForCashiers = () => {
         const data = [];
         for (let cashiers = 1; cashiers <= 8; cashiers++) {
             // eslint-disable-next-line react-hooks/rules-of-hooks
-            const result = useQueueingSystemMMm({
-                customerArrivalRate,
-                serviceRatePerCashier,
-                numberOfCashiers: cashiers,
-                dailyWorkingHours,
-                costPerCashierPerHour,
-                waitingCostPerCustomerPerHour,
-                averageSpendingPerPurchase,
-                profitMarginPerSale,
-            });
+            const result = useQueueingSystemMMm();
 
             data.push({
                 cashiers,
@@ -83,11 +74,8 @@ const Home = () => {
             title: "Utilización (%)",
         });
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         waitingTimeSeries.setData(data.map((d) => ({ time: d.cashiers as any, value: d.waitingTime })));
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         customersInQueueSeries.setData(data.map((d) => ({ time: d.cashiers as any, value: d.customersInQueue })));
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         utilizationSeries.setData(data.map((d) => ({ time: d.cashiers as any, value: d.utilization })));
 
         // Area Chart - Cost Analysis
@@ -124,18 +112,14 @@ const Home = () => {
             title: "Ganancia Neta",
         });
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         waitingCostSeries.setData(data.map((d) => ({ time: d.cashiers as any, value: d.waitingCost })));
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         cashierCostSeries.setData(data.map((d) => ({ time: d.cashiers as any, value: d.cashierCost })));
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         profitSeries.setData(data.map((d) => ({ time: d.cashiers as any, value: d.profit })));
 
         return () => {
             lineChart.remove();
             areaChart.remove();
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         customerArrivalRate,
         serviceRatePerCashier,

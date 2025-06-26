@@ -19,7 +19,9 @@ export default tseslint.config(
         },
         rules: {
             ...reactHooks.configs.recommended.rules,
-            "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
+            "react-refresh/only-export-components": "off", // <- Desactiva advertencia de exportación de componentes
+            "@typescript-eslint/no-explicit-any": "off", // <- Desactiva advertencia por usar `any`
+            "react-hooks/exhaustive-deps": "off", // <- Desactiva advertencia de dependencias en hooks
         },
     }
 );
