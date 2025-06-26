@@ -1,15 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useQueueingSystemMMm } from "../hooks/useQueueingSystemMMm";
 import { createChart, ColorType, LineSeries, AreaSeries } from "lightweight-charts";
+import Layout from "../layouts/Layout";
+import { useCashier } from "../hooks/useCashier";
+import CashierServiceSettings from "../components/CashierServiceSettings";
 
 const Home = () => {
-    const [customerArrivalRate, setCustomerArrivalRate] = useState(20);
-    const [serviceRatePerCashier, setServiceRatePerCashier] = useState(30);
-    const [dailyWorkingHours, setDailyWorkingHours] = useState(8);
-    const [costPerCashierPerHour, setCostPerCashierPerHour] = useState(15);
-    const [waitingCostPerCustomerPerHour, setWaitingCostPerCustomerPerHour] = useState(50);
-    const [averageSpendingPerPurchase, setAverageSpendingPerPurchase] = useState(45);
-    const [profitMarginPerSale, setProfitMarginPerSale] = useState(0.15);
+    const {
+        serviceRatePerCashier,
+        numberOfCashiers,
+        dailyWorkingHours,
+        costPerCashierPerHour,
+        waitingCostPerCustomerPerHour,
+        averageSpendingPerPurchase,
+        profitMarginPerSale,
+        customerArrivalRate,
+    } = useCashier();
 
     const lineChartRef = useRef(null);
     const areaChartRef = useRef(null);
@@ -141,70 +147,22 @@ const Home = () => {
     ]);
 
     return (
-        <div>
-            <h1>Sistema de Colas ATM - Análisis M/M/m</h1>
+        <Layout>
             <div>
+                <CashierServiceSettings />
                 <div>
-                    <label>Tasa de Llegada (λ): {customerArrivalRate} clientes/hora</label>
-                    <input
-                        type="range"
-                        min="10"
-                        max="50"
-                        value={customerArrivalRate}
-                        onChange={(e) => setCustomerArrivalRate(Number(e.target.value))}
-                        style={{ width: "100%", marginTop: "5px" }}
-                    />
-                </div>
+                    <div>
+                        <h3>Métricas del Sistema por Número de Cajeros</h3>
+                        <div ref={lineChartRef} />
+                    </div>
 
-                <div>
-                    <label>Tasa de Servicio (μ): {serviceRatePerCashier} clientes/hora</label>
-                    <input
-                        type="range"
-                        min="20"
-                        max="60"
-                        value={serviceRatePerCashier}
-                        onChange={(e) => setServiceRatePerCashier(Number(e.target.value))}
-                        style={{ width: "100%", marginTop: "5px" }}
-                    />
-                </div>
-
-                <div>
-                    <label>Horas de Trabajo: {dailyWorkingHours} horas</label>
-                    <input
-                        type="range"
-                        min="6"
-                        max="12"
-                        value={dailyWorkingHours}
-                        onChange={(e) => setDailyWorkingHours(Number(e.target.value))}
-                        style={{ width: "100%", marginTop: "5px" }}
-                    />
-                </div>
-
-                <div>
-                    <label>Costo por Cajero: ${costPerCashierPerHour}/hora</label>
-                    <input
-                        type="range"
-                        min="10"
-                        max="30"
-                        value={costPerCashierPerHour}
-                        onChange={(e) => setCostPerCashierPerHour(Number(e.target.value))}
-                        style={{ width: "100%", marginTop: "5px" }}
-                    />
+                    <div>
+                        <h3>Análisis de Costos y Ganancias</h3>
+                        <div ref={areaChartRef} />
+                    </div>
                 </div>
             </div>
-
-            <div>
-                <div>
-                    <h3>Métricas del Sistema por Número de Cajeros</h3>
-                    <div ref={lineChartRef} />
-                </div>
-
-                <div>
-                    <h3>Análisis de Costos y Ganancias</h3>
-                    <div ref={areaChartRef} />
-                </div>
-            </div>
-        </div>
+        </Layout>
     );
 };
 

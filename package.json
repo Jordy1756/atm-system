@@ -12,8 +12,8 @@
         "format:check": "prettier --check ."
     },
     "dependencies": {
-        "lightweight-charts": "^5.0.7",
-        "react": "^19.1.0",
+        "lightweight-char19.1.0ts": "^5.0.7",
+        "react": "^",
         "react-dom": "^19.1.0"
     },
     "devDependencies": {
