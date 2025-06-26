@@ -19,24 +19,22 @@ const Home = () => {
 
     const lineChartRef = useRef<HTMLDivElement>(null);
     const areaChartRef = useRef<HTMLDivElement>(null);
+    const result = useQueueingSystemMMm();
 
     const generateDataForCashiers = () => {
         const data = [];
-        // for (let cashiers = 1; cashiers <= 8; cashiers++) {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        const result = useQueueingSystemMMm();
-
-        data.push({
-            cashiers: numberOfCashiers,
-            waitingTime: result.averageWaitingTimeInQueue * 60, // Convert to minutes
-            customersInQueue: result.averageCustomersInQueue,
-            utilization: result.systemUtilizationRate * 100,
-            totalCost: result.totalSystemCost,
-            waitingCost: result.totalWaitingCost,
-            cashierCost: result.totalCashierCost,
-            profit: result.dailyNetProfit,
-        });
-        // }
+        for (let cashiers = 1; cashiers <= 8; cashiers++) {
+            data.push({
+                cashiers: cashiers,
+                waitingTime: result.averageWaitingTimeInQueue * 60, // Convert to minutes
+                customersInQueue: result.averageCustomersInQueue,
+                utilization: result.systemUtilizationRate * 100,
+                totalCost: result.totalSystemCost,
+                waitingCost: result.totalWaitingCost,
+                cashierCost: result.totalCashierCost,
+                profit: result.dailyNetProfit,
+            });
+        }
         return data;
     };
 
@@ -134,14 +132,14 @@ const Home = () => {
         <Layout>
             <CashierServiceSettings />
             <div>
-                {/* <div>
+                <div>
                     <h3>Métricas del Sistema por Número de Cajeros</h3>
                     <div ref={lineChartRef} />
                 </div>
                 <div>
                     <h3>Análisis de Costos y Ganancias</h3>
                     <div ref={areaChartRef} />
-                </div> */}
+                </div>
             </div>
         </Layout>
     );
