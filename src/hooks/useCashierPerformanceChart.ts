@@ -100,33 +100,25 @@ export const useCashierPerformanceChart = () => {
         if (dataKey === "totalWaitingCost" || dataKey === "totalCashierCost") {
             seriesRef.current?.applyOptions({
                 priceFormat: {
-                    type: "custom",
                     formatter: (value: number) => `$${value.toFixed(2)}`,
-                    minMove: 1,
                 },
             });
         } else if (dataKey === "systemUtilizationRate") {
             seriesRef.current?.applyOptions({
                 priceFormat: {
-                    type: "custom",
                     formatter: (value: number) => `${value.toFixed(0)}%`,
-                    minMove: 1,
                 },
             });
         } else if (dataKey === "averageWaitingTimeInQueue" || dataKey === "averageTotalTimeInSystem") {
             seriesRef.current?.applyOptions({
                 priceFormat: {
-                    type: "custom",
                     formatter: (value: number) => `${value.toFixed(0)} min`,
-                    minMove: 1,
                 },
             });
         } else {
             seriesRef.current?.applyOptions({
                 priceFormat: {
-                    type: "custom",
                     formatter: (value: number) => `${value.toFixed(0)}`,
-                    minMove: 1,
                 },
             });
         }
