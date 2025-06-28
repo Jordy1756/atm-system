@@ -56,6 +56,11 @@ export const useCashierPerformanceChart = () => {
             lastValueVisible: false,
             lineWidth: 2,
             priceLineVisible: false,
+            priceFormat: {
+                type: "custom",
+                formatter: (value: number) => `${value.toFixed(0)} min`,
+                minMove: 1,
+            },
         });
 
         chart.subscribeCrosshairMove((param) => {
@@ -92,15 +97,41 @@ export const useCashierPerformanceChart = () => {
     }, [cashierData]);
 
     const updateMetric = (dataKey: keyof (typeof cashierData)[0]) => {
-        seriesRef.current?.applyOptions({
-            priceFormat: {
-                type: "volume",
-                precision: 2,
-                minMove: 0.01,
-            },
-        });
+        if (dataKey === "totalWaitingCost" || dataKey === "totalCashierCost") {
+            seriesRef.current?.applyOptions({
+                priceFormat: {
+                    type: "custom",
+                    formatter: (value: number) => `$${value.toFixed(2)}`,
+                    minMove: 1,
+                },
+            });
+        } else if (dataKey === "systemUtilizationRate") {
+            seriesRef.current?.applyOptions({
+                priceFormat: {
+                    type: "custom",
+                    formatter: (value: number) => `${value.toFixed(0)}%`,
+                    minMove: 1,
+                },
+            });
+        } else if (dataKey === "averageWaitingTimeInQueue" || dataKey === "averageTotalTimeInSystem") {
+            seriesRef.current?.applyOptions({
+                priceFormat: {
+                    type: "custom",
+                    formatter: (value: number) => `${value.toFixed(0)} min`,
+                    minMove: 1,
+                },
+            });
+        } else {
+            seriesRef.current?.applyOptions({
+                priceFormat: {
+                    type: "custom",
+                    formatter: (value: number) => `${value.toFixed(0)}`,
+                    minMove: 1,
+                },
+            });
+        }
         seriesRef.current?.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d[dataKey] as number })));
-    }
+    };
 
     return {
         chartRef,
