@@ -31,12 +31,16 @@ export const useCashierPerformanceChart = () => {
                 vertLines: { color: "#2b2b30" },
                 horzLines: { visible: false },
             },
+            crosshair: {
+                horzLine: {
+                    labelBackgroundColor: "#26a69a",
+                },
+            },
         });
 
         chart.applyOptions({
             rightPriceScale: { scaleMargins: { top: 0.3, bottom: 0.25 } },
             crosshair: {
-                // horzLine: { visible: false, labelVisible: false },
                 vertLine: { labelVisible: false },
             },
             timeScale: {
@@ -87,8 +91,16 @@ export const useCashierPerformanceChart = () => {
         return () => chart.remove();
     }, [cashierData]);
 
-    const updateMetric = (dataKey: keyof (typeof cashierData)[0]) => 
+    const updateMetric = (dataKey: keyof (typeof cashierData)[0]) => {
+        seriesRef.current?.applyOptions({
+            priceFormat: {
+                type: "volume",
+                precision: 2,
+                minMove: 0.01,
+            },
+        });
         seriesRef.current?.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d[dataKey] as number })));
+    }
 
     return {
         chartRef,
