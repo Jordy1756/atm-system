@@ -79,8 +79,8 @@ const CashierServiceSettings = () => {
             <Input
                 label={`Margen de Ganancia por Venta: ${Math.round(profitMarginPerSale * 100)}%`}
                 value={Math.round(profitMarginPerSale * 100)}
-                min={0}
-                max={100}
+                min={1}
+                max={3}
                 onChange={(value) => setProfitMarginPerSale(value / 100)}
             />
         </section>

@@ -32,7 +32,7 @@ export const CashierProvider = ({ children }: { children: ReactNode }) => {
     const [costPerCashierPerHour, setCostPerCashierPerHour] = useState<number>(15);
     const [waitingCostPerCustomerPerHour, setWaitingCostPerCustomerPerHour] = useState<number>(50);
     const [averageSpendingPerPurchase, setAverageSpendingPerPurchase] = useState<number>(45);
-    const [profitMarginPerSale, setProfitMarginPerSale] = useState<number>(0.15);
+    const [profitMarginPerSale, setProfitMarginPerSale] = useState<number>(0.01);
     const [cashierData, setCashierData] = useState<CashierData[]>([]);
 
     useEffect(() => {

@@ -10,18 +10,15 @@ type Props = {
 
 const Input = ({ label, value, min, max, onChange }: Props) => {
     return (
-        <div className="input-container">
-            <label className="input-label">{label}</label>
-            <div className="input-wrapper">
-                <input
-                    type="range"
-                    className="input-range"
-                    min={min}
-                    max={max}
-                    value={value}
-                    onChange={(e) => onChange(+e.target.value)}
-                />
-            </div>
+        <div className="input__box">
+            <label>{label}</label>
+            <input
+                type="range"
+                min={min}
+                max={max}
+                value={value}
+                onChange={(e) => onChange(+e.target.value)}
+            />
         </div>
     );
 };

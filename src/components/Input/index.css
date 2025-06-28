@@ -1,62 +1,39 @@
-/* index.css */
-.input-container {
-    max-width: 320px;
-    margin: 1rem auto;
-    font-family: Arial, sans-serif;
-}
-
-.input-label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: white;
-}
-
-.input-wrapper {
+.input__box {
+    width: 100%;
     display: flex;
-    align-items: center;
-    gap: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
-.input-range {
-    flex-grow: 1;
+.input__box > label {
+    color: var(--neutral-50);
+}
+
+.input__box > input {
     height: 6px;
-    border-radius: 4px;
+    border-radius: var(--border-radius-out);
+    background-color: var(--neutral-800);
     appearance: none;
-    background-color: #ddd;
-    cursor: pointer;
-    outline: none;
 }
 
-/* Estilo para el "thumb" del slider (Chrome, Edge, Safari) */
-.input-range::-webkit-slider-thumb {
+.input__box > input::-webkit-slider-thumb {
     appearance: none;
-    width: 18px;
-    height: 18px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
-    background: var(--primary-500);
+    background: var(--secondary-500);
     cursor: pointer;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
     transition: background-color 0.3s ease;
     border: none;
-    margin-top: -6px; /* Centra verticalmente el thumb */
 }
 
-/* Estilo para el "thumb" en Firefox */
-.input-range::-moz-range-thumb {
-    width: 18px;
-    height: 18px;
+.input__box > input::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
-    background: var(--primary-500);
+    background: var(--secondary-500);
     cursor: pointer;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
     border: none;
     transition: background-color 0.3s ease;
-}
-
-.input-value {
-    width: 40px;
-    text-align: center;
-    font-weight: 600;
-    color: #222;
 }

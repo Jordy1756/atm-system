@@ -26,32 +26,32 @@ const CashierPerformanceChart = ({ id }: Props) => {
 
     return (
         <section id={id} className="cashier__performance-chart">
-            <header>
-                <button 
+            <header className="cashier__performance-chart-header">
+                <button
                     className={activeButton === "averageWaitingTime" ? "active" : ""}
                     onClick={() => handleButtonClick("averageWaitingTime", setAverageWaitingTime)}
                 >
                     Tiempo de espera promedio
                 </button>
-                <button 
+                <button
                     className={activeButton === "averageCustomersInQueue" ? "active" : ""}
                     onClick={() => handleButtonClick("averageCustomersInQueue", setAverageCustomersInQueue)}
                 >
                     Promedio de clientes en cola
                 </button>
-                <button 
+                <button
                     className={activeButton === "systemUtilizationRate" ? "active" : ""}
                     onClick={() => handleButtonClick("systemUtilizationRate", setSystemUtilizationRate)}
                 >
                     Tasa de utilización del sistema
                 </button>
-                <button 
+                <button
                     className={activeButton === "totalWaitingCost" ? "active" : ""}
                     onClick={() => handleButtonClick("totalWaitingCost", setTotalWaitingCost)}
                 >
                     Costo total de espera
                 </button>
-                <button 
+                <button
                     className={activeButton === "totalCashierCost" ? "active" : ""}
                     onClick={() => handleButtonClick("totalCashierCost", setTotalCashierCost)}
                 >

@@ -85,26 +85,22 @@ const FinancialPerformanceChart = ({ id }: Props) => {
         );
         dailyNetProfitSeries.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d.dailyNetProfit })));
 
-        return () => {
-            chart.remove();
-        };
+        return () => chart.remove();
     }, [cashierData]);
 
     return (
-        <section id={id} className="cashier__performance-chart">
-            <header className="header">
-                <div className="div1">
+        <section id={id} className="cashier__financial-chart">
+            <header className="cashier__financial-chart-header">
+                <div>
                     <span className="earnings"></span>
                     <p>Ganancias</p>
                 </div>
-
-                <div className="div1">
+                <div>
                     <span className="losses"></span>
                     <p>Pérdidas</p>
                 </div>
-
-                <div className="div1">
-                    <span className="utilitys"></span>
+                <div>
+                    <span className="utilities"></span>
                     <p>Utilidades</p>
                 </div>
             </header>

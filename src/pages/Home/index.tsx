@@ -8,7 +8,7 @@ const Home = () => {
         <>
             <header className="header">
                 <nav>
-                    <h1>My App</h1>
+                    <h1>M3Line</h1>
                     <ul>
                         <li>
                             <a href="#cashier-performance-chart">Rendimiento de Cajeros</a>

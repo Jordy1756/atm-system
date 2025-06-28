@@ -1,4 +1,4 @@
-.cashier__performance-chart {
+.cashier__financial-chart {
     padding: 1rem;
     min-height: calc(100dvh - 83px);
     display: flex;
@@ -6,43 +6,40 @@
     gap: 1rem;
 }
 
-.cashier__performance-chart > div {
-    flex: 1;
-    position: relative;
-}
-
-.earnings {
-    background-color: var(--secondary-500); /* color secundario */
-    border-radius: 4px; /* opcional: esquinas redondeadas */
-    display: inline-block;
-    min-width: 16px;
-    min-height: 16px;
-}
-
-.losses {
-    background-color: var(--primary-500); /* color primario */
-    border-radius: 4px; /* opcional: esquinas redondeadas */
-    display: inline-block;
-    min-width: 16px;
-    min-height: 16px;
-}
-
-.utilitys {
-    background-color: var(--tertiary-500); /* color terciario */
-    border-radius: 4px; /* opcional: esquinas redondeadas */
-    display: inline-block;
-    min-width: 16px;
-    min-height: 16px;
-}
-
-.header {
+.cashier__financial-chart > .cashier__financial-chart-header {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 2rem;
 }
-.div1 {
+
+.cashier__financial-chart > .cashier__financial-chart-header > div {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
+
+.cashier__financial-chart > .cashier__financial-chart-header > div > span {
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+}
+
+.cashier__financial-chart > .cashier__financial-chart-header > div > span.earnings {
+    background-color: var(--secondary-500);
+}
+
+.cashier__financial-chart > .cashier__financial-chart-header > div > span.losses {
+    background-color: var(--primary-500);
+}
+
+.cashier__financial-chart > .cashier__financial-chart-header > div > span.utilities {
+    background-color: var(--tertiary-500);
+}
+
+.cashier__financial-chart > div {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
