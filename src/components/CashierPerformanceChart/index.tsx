@@ -13,7 +13,9 @@ const CashierPerformanceChart = ({ id }: Props) => {
         chartRef,
         tooltipData,
         setAverageWaitingTime,
+        setAverageTotalTimeInSystem,
         setAverageCustomersInQueue,
+        setAverageCustomersInSystem,
         setSystemUtilizationRate,
         setTotalWaitingCost,
         setTotalCashierCost,
@@ -34,10 +36,22 @@ const CashierPerformanceChart = ({ id }: Props) => {
                     Tiempo de espera promedio
                 </button>
                 <button
+                    className={activeButton === "averageTotalTimeInSystem" ? "active" : ""}
+                    onClick={() => handleButtonClick("averageTotalTimeInSystem", setAverageTotalTimeInSystem)}
+                >
+                    Tiempo total promedio en el sistema
+                </button>
+                <button
                     className={activeButton === "averageCustomersInQueue" ? "active" : ""}
                     onClick={() => handleButtonClick("averageCustomersInQueue", setAverageCustomersInQueue)}
                 >
                     Promedio de clientes en cola
+                </button>
+                <button
+                    className={activeButton === "averageCustomersInSystem" ? "active" : ""}
+                    onClick={() => handleButtonClick("averageCustomersInSystem", setAverageCustomersInSystem)}
+                >
+                    Promedio de clientes en el sistema
                 </button>
                 <button
                     className={activeButton === "systemUtilizationRate" ? "active" : ""}

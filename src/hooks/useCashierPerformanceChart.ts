@@ -87,18 +87,18 @@ export const useCashierPerformanceChart = () => {
         return () => chart.remove();
     }, [cashierData]);
 
-    const updateMetric = (dataKey: keyof (typeof cashierData)[0], title: string) => {
+    const updateMetric = (dataKey: keyof (typeof cashierData)[0]) =>
         seriesRef.current?.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d[dataKey] as number })));
-        setTooltipData((prev) => ({ ...prev, title }));
-    };
 
     return {
         chartRef,
         tooltipData,
-        setAverageWaitingTime: () => updateMetric("averageWaitingTimeInQueue", "Tiempo de espera promedio"),
-        setAverageCustomersInQueue: () => updateMetric("averageCustomersInQueue", "Promedio de clientes en cola"),
-        setSystemUtilizationRate: () => updateMetric("systemUtilizationRate", "Tasa de utilización del sistema"),
-        setTotalWaitingCost: () => updateMetric("totalWaitingCost", "Costo total de espera"),
-        setTotalCashierCost: () => updateMetric("totalCashierCost", "Costo total de cajeros"),
+        setAverageWaitingTime: () => updateMetric("averageWaitingTimeInQueue"),
+        setAverageTotalTimeInSystem: () => updateMetric("averageTotalTimeInSystem"),
+        setAverageCustomersInSystem: () => updateMetric("averageCustomersInSystem"),
+        setAverageCustomersInQueue: () => updateMetric("averageCustomersInQueue"),
+        setSystemUtilizationRate: () => updateMetric("systemUtilizationRate"),
+        setTotalWaitingCost: () => updateMetric("totalWaitingCost"),
+        setTotalCashierCost: () => updateMetric("totalCashierCost"),
     };
 };

@@ -53,7 +53,9 @@ export const CashierProvider = ({ children }: { children: ReactNode }) => {
                 data.push({
                     cashiers,
                     averageWaitingTimeInQueue: result.averageWaitingTimeInQueue * 60,
+                    averageTotalTimeInSystem: result.averageTotalTimeInSystem * 60,
                     averageCustomersInQueue: result.averageCustomersInQueue,
+                    averageCustomersInSystem: result.averageCustomersInSystem,
                     systemUtilizationRate: result.systemUtilizationRate * 100,
                     totalWaitingCost: result.totalWaitingCost,
                     totalCashierCost: result.totalCashierCost,
