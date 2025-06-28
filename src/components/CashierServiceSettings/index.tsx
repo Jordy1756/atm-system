@@ -34,11 +34,11 @@ const CashierServiceSettings = () => {
             <Input
                 label={`Tasa de Servicio (μ): ${serviceRatePerCashier} clientes/hora`}
                 value={serviceRatePerCashier}
-                min={20}
-                max={60}
-                onChange={(val) => {
-                    if (val > 60 || val <= customerArrivalRate) return;
-                    setServiceRatePerCashier(val);
+                min={11}
+                max={30}
+                onChange={(value) => {
+                    if (value > 30 || value <= customerArrivalRate) return;
+                    setServiceRatePerCashier(value);
                 }}
             />
             <Input

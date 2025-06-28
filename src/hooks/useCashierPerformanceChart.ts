@@ -1,19 +1,25 @@
 import { useEffect, useRef, useState } from "react";
-import { createChart, ColorType, type IChartApi, type ISeriesApi, type AreaData, AreaSeries } from "lightweight-charts";
+import { createChart, ColorType, type IChartApi, type ISeriesApi, AreaSeries } from "lightweight-charts";
 import { useCashier } from "./useCashier";
+import type { TooltipData } from "../types/ChartTooltipTypes";
 
 export const useCashierPerformanceChart = () => {
     const chartRef = useRef<HTMLDivElement | null>(null);
     const chartInstanceRef = useRef<IChartApi | null>(null);
     const seriesRef = useRef<ISeriesApi<"Area"> | null>(null);
-    const toolTipRef = useRef<HTMLDivElement | null>(null);
     const { cashierData } = useCashier();
-    const [currentMetric, setCurrentMetric] = useState<string>("");
+    const [tooltipData, setTooltipData] = useState<TooltipData>({
+        title: "Tiempo de espera promedio",
+        value: 0,
+        cashiers: 0,
+        visible: false,
+        x: 0,
+        y: 0,
+    });
 
     useEffect(() => {
-        if (!chartRef.current) return;
+        if (!chartRef.current || !cashierData.length) return;
 
-        // Crear gráfico
         const chart = createChart(chartRef.current, {
             layout: {
                 background: { type: ColorType.Solid, color: "#1a1a1a" },
@@ -21,16 +27,11 @@ export const useCashierPerformanceChart = () => {
             },
             width: chartRef.current.clientWidth,
             height: chartRef.current.clientHeight,
-            grid: {
-                vertLines: { visible: false },
-                horzLines: { visible: false },
-            },
+            grid: { vertLines: { visible: false }, horzLines: { visible: false } },
         });
 
         chart.applyOptions({
-            rightPriceScale: {
-                scaleMargins: { top: 0.3, bottom: 0.25 },
-            },
+            rightPriceScale: { scaleMargins: { top: 0.3, bottom: 0.25 } },
             crosshair: {
                 horzLine: { visible: false, labelVisible: false },
                 vertLine: { labelVisible: false },
@@ -46,15 +47,8 @@ export const useCashierPerformanceChart = () => {
             bottomColor: "rgba(38, 166, 154, 0.05)",
             lineColor: "rgba(38, 166, 154, 1)",
             lineWidth: 1,
-            crosshairMarkerVisible: false,
         });
 
-        const toolTip = document.createElement("div");
-        toolTip.className = "chart-tooltip";
-        chartRef.current.appendChild(toolTip);
-        toolTipRef.current = toolTip;
-
-        // Suscribirse a eventos del cursor
         chart.subscribeCrosshairMove((param) => {
             if (
                 !param.point ||
@@ -63,68 +57,43 @@ export const useCashierPerformanceChart = () => {
                 param.point.x > chartRef.current!.clientWidth ||
                 param.point.y < 0 ||
                 param.point.y > chartRef.current!.clientHeight
-            ) {
-                toolTip.style.display = "none";
-                return;
-            }
+            )
+                return setTooltipData((prev) => ({ ...prev, visible: false }));
 
-            const data = param.seriesData.get(series) as AreaData<any>;
-            if (!data || data.value === undefined) {
-                toolTip.style.display = "none";
-                return;
-            }
+            const data = param.seriesData.get(series);
+            if (!data || !("value" in data) || data.value === undefined)
+                return setTooltipData((prev) => ({ ...prev, visible: false }));
 
-            toolTip.style.display = "block";
-            toolTip.innerHTML = `
-                <div class="tooltip-title">${currentMetric}</div>
-                <div class="tooltip-value">${data.value.toFixed(2)}</div>
-                <div class="tooltip-cashiers">Cajeros: ${param.time}</div>
-            `;
-
-            // Posicionamiento del tooltip
-            const coordinate = series.priceToCoordinate(data.value);
-            if (coordinate === null) return;
-
-            const y = coordinate - toolTip.offsetHeight - 10;
-            const x = Math.max(
-                0,
-                Math.min(chartRef.current!.clientWidth - toolTip.offsetWidth, param.point.x - toolTip.offsetWidth / 2)
-            );
-
-            toolTip.style.left = `${x}px`;
-            toolTip.style.top = `${y}px`;
+            setTooltipData({
+                title: tooltipData.title,
+                value: data.value,
+                cashiers: param.time as number,
+                visible: true,
+                x: param.point.x,
+                y: param.point.y - 50,
+            });
         });
 
         chartInstanceRef.current = chart;
         seriesRef.current = series;
-        setCurrentMetric("Tiempo de espera promedio");
         series.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d.averageWaitingTimeInQueue })));
         chart.timeScale().fitContent();
 
-        return () => {
-            chart.remove();
-            if (toolTipRef.current) toolTipRef.current.remove();
-        };
+        return () => chart.remove();
     }, [cashierData]);
 
-    const updateMetric = (dataKey: keyof (typeof cashierData)[0], metricName: string) => {
-        if (!seriesRef.current) return;
-        seriesRef.current.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d[dataKey] as number })));
-        setCurrentMetric(metricName);
+    const updateMetric = (dataKey: keyof (typeof cashierData)[0], title: string) => {
+        seriesRef.current?.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d[dataKey] as number })));
+        setTooltipData((prev) => ({ ...prev, title }));
     };
-
-    const setAverageWaitingTime = () => updateMetric("averageWaitingTimeInQueue", "Tiempo de espera promedio");
-    const setAverageCustomersInQueue = () => updateMetric("averageCustomersInQueue", "Promedio de clientes en cola");
-    const setSystemUtilizationRate = () => updateMetric("systemUtilizationRate", "Tasa de utilización del sistema");
-    const setTotalWaitingCost = () => updateMetric("totalWaitingCost", "Costo total de espera");
-    const setTotalCashierCost = () => updateMetric("totalCashierCost", "Costo total de cajeros");
 
     return {
         chartRef,
-        setAverageWaitingTime,
-        setAverageCustomersInQueue,
-        setSystemUtilizationRate,
-        setTotalWaitingCost,
-        setTotalCashierCost,
+        tooltipData,
+        setAverageWaitingTime: () => updateMetric("averageWaitingTimeInQueue", "Tiempo de espera promedio"),
+        setAverageCustomersInQueue: () => updateMetric("averageCustomersInQueue", "Promedio de clientes en cola"),
+        setSystemUtilizationRate: () => updateMetric("systemUtilizationRate", "Tasa de utilización del sistema"),
+        setTotalWaitingCost: () => updateMetric("totalWaitingCost", "Costo total de espera"),
+        setTotalCashierCost: () => updateMetric("totalCashierCost", "Costo total de cajeros"),
     };
 };

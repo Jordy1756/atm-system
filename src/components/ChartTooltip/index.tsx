@@ -1,24 +1,22 @@
+import type { TooltipData } from "../../types/ChartTooltipTypes";
 import "./index.css";
-import type { ChartTooltipProps } from "../../types/ChartTooltipTypes";
-import { useTooltip } from "../../hooks/useTooltip";
 
-const ChartTooltip = ({ chart, series, container }: ChartTooltipProps) => {
-    const { tooltipRef, tooltipData } = useTooltip({ chart, series, container });
+const ChartTooltip = ({ title, value, cashiers, x, y, visible }: TooltipData) => {
+    if (!visible) return null;
+
     return (
         <div
-            ref={tooltipRef}
             className="chart-tooltip"
             style={{
-                left: `${tooltipData.x}px`,
-                top: `${tooltipData.y}px`,
-                display: tooltipData.visible ? "block" : "none",
+                position: "absolute",
+                left: x,
+                top: y,
+                zIndex: 1000,
             }}
         >
-            <p>Cajeros</p>
-            <p>{tooltipData.price}</p>
-            <p>
-                {tooltipData.dateStr} cajero{tooltipData.dateStr > "1" ? "s" : ""}
-            </p>
+            <div className="tooltip-title">{title}</div>
+            <div className="tooltip-value">{value.toFixed(2)}</div>
+            <div className="tooltip-cashiers">Cajeros: {cashiers}</div>
         </div>
     );
 };

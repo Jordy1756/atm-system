@@ -1,4 +1,5 @@
 import { useCashierPerformanceChart } from "../../hooks/useCashierPerformanceChart";
+import ChartTooltip from "../ChartTooltip";
 import "./index.css";
 
 type Props = {
@@ -8,6 +9,7 @@ type Props = {
 const CashierPerformanceChart = ({ id }: Props) => {
     const {
         chartRef,
+        tooltipData,
         setAverageWaitingTime,
         setAverageCustomersInQueue,
         setSystemUtilizationRate,
@@ -24,7 +26,16 @@ const CashierPerformanceChart = ({ id }: Props) => {
                 <button onClick={setTotalWaitingCost}>Costo total de espera</button>
                 <button onClick={setTotalCashierCost}>Costo total de cajeros</button>
             </header>
-            <div ref={chartRef} className="chart-container" />
+            <div ref={chartRef} className="chart-container">
+                <ChartTooltip
+                    title={tooltipData.title}
+                    value={tooltipData.value}
+                    cashiers={tooltipData.cashiers}
+                    x={tooltipData.x}
+                    y={tooltipData.y}
+                    visible={tooltipData.visible}
+                />
+            </div>
         </section>
     );
 };
