@@ -3,7 +3,11 @@ import { createChart, ColorType, LineSeries } from "lightweight-charts";
 import { useCashier } from "../../hooks/useCashier";
 import "./index.css";
 
-const FinancialPerformanceChart = () => {
+type Props = {
+    id: string;
+};
+
+const FinancialPerformanceChart = ({ id }: Props) => {
     const chartRef = useRef<HTMLDivElement>(null);
     const { cashierData } = useCashier();
 
@@ -83,7 +87,7 @@ const FinancialPerformanceChart = () => {
     }, [cashierData]);
 
     return (
-        <section className="cashier__performance-chart">
+        <section id={id} className="cashier__performance-chart">
             <div ref={chartRef} />
         </section>
     );

@@ -3,7 +3,11 @@ import { createChart, ColorType, AreaSeries } from "lightweight-charts";
 import { useCashier } from "../../hooks/useCashier";
 import "./index.css";
 
-const CashierPerformanceChart = () => {
+type Props = {
+    id: string;
+};
+
+const CashierPerformanceChart = ({ id }: Props) => {
     const chartRef = useRef<HTMLDivElement>(null);
     const seriesRef = useRef<any>(null);
     const { cashierData } = useCashier();
@@ -95,7 +99,7 @@ const CashierPerformanceChart = () => {
         seriesRef.current.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d.totalCashierCost })));
 
     return (
-        <section className="cashier__performance-chart">
+        <section id={id} className="cashier__performance-chart">
             <header>
                 <button onClick={setAverageWaitingTime}>Tiempo de espera promedio</button>
                 <button onClick={setAverageCustomersInQueue}>Promedio de clientes en cola</button>

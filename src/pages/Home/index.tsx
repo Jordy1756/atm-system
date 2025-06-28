@@ -1,20 +1,34 @@
-import Layout from "../../layouts/Layout";
 import CashierServiceSettings from "../../components/CashierServiceSettings";
 import CashierPerformanceChart from "../../components/CashierPerformanceChart";
-import "./index.css";
 import FinancialPerformanceChart from "../../components/FinancialPerformanceChart";
+import "./index.css";
 
 const Home = () => {
     return (
-        <Layout>
-            <aside className="dashboard__sidebar">
-                <CashierServiceSettings />
-            </aside>
-            <section className="dashboards__container">
-                <CashierPerformanceChart />
-                <FinancialPerformanceChart />
-            </section>
-        </Layout>
+        <>
+            <header className="header">
+                <nav>
+                    <h1>My App</h1>
+                    <ul>
+                        <li>
+                            <a href="#cashier-performance-chart">Rendimiento de Cajeros</a>
+                        </li>
+                        <li>
+                            <a href="#financial-performance-chart">Rendimiento Financiero</a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+            <main className="main">
+                <aside className="dashboard__sidebar">
+                    <CashierServiceSettings />
+                </aside>
+                <section className="dashboards__container">
+                    <CashierPerformanceChart id="cashier-performance-chart" />
+                    <FinancialPerformanceChart id="financial-performance-chart" />
+                </section>
+            </main>
+        </>
     );
 };
 

@@ -1,3 +1,44 @@
+.header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    z-index: 999;
+    background-color: var(--neutral-900);
+    border-bottom: 1px solid #4a4a4a;
+}
+
+.header > nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header > nav > h1 {
+    font-size: var(--text-size-xlarge);
+    color: var(--primary-500);
+}
+
+.header > nav > ul {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header > nav > ul > li > a {
+    transition: color 0.3s ease;
+}
+
+.header > nav > ul > li > a:hover {
+    color: var(--primary-500);
+}
+
+.main {
+    position: relative;
+    display: flex;
+}
+
 .dashboard__sidebar {
     position: sticky;
     top: 0;
