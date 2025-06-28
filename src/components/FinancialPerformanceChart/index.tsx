@@ -105,7 +105,7 @@ const FinancialPerformanceChart = ({ id }: Props) => {
 
                 <div className="div1">
                     <span className="utilitys"></span>
-                    <p>Ganancias</p>
+                    <p>Utilidades</p>
                 </div>
             </header>
             <div ref={chartRef} />
