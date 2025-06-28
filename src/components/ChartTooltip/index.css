@@ -1,18 +1,21 @@
 .chart__tooltip {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     padding: 1rem;
+    min-width: 140px;
     background-color: rgba(26, 26, 26, 0.9);
     border: 1px solid var(--secondary-500);
     border-radius: var(--border-radius-out);
     pointer-events: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    z-index: 997;
 }
 
 .chart__tooltip > .tooltip__title {
     color: var(--secondary-500);
     font-size: 0.9rem;
+    white-space: nowrap;
 }
 
 .tooltip__value {

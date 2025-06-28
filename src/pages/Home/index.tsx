@@ -11,7 +11,7 @@ const Home = () => {
                     <h1>M3Line</h1>
                     <ul>
                         <li>
-                            <a href="#cashier-performance-chart">Rendimiento de Cajeros</a>
+                            <a href="#">Rendimiento de Cajeros</a>
                         </li>
                         <li>
                             <a href="#financial-performance-chart">Rendimiento Financiero</a>

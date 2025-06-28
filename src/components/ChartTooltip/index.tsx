@@ -8,10 +8,10 @@ const ChartTooltip = ({ title, value, cashiers, x, y, visible }: TooltipData) =>
         <div
             className="chart__tooltip"
             style={{
-                position: "absolute",
+                
                 left: x,
                 top: y,
-                zIndex: 1000,
+                
             }}
         >
             <h2 className="tooltip__title">{title}</h2>
