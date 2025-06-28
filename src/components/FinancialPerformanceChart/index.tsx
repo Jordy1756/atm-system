@@ -23,7 +23,6 @@ const FinancialPerformanceChart = ({ id }: Props) => {
             height: chartRef.current.clientHeight,
             grid: {
                 vertLines: { color: "#333" },
-                horzLines: { color: "#333" },
             },
         });
 
@@ -44,12 +43,7 @@ const FinancialPerformanceChart = ({ id }: Props) => {
                 },
             },
             grid: {
-                vertLines: {
-                    visible: false,
-                },
-                horzLines: {
-                    visible: false,
-                },
+                horzLines: { visible: false },
             },
             timeScale: {
                 timeVisible: false,
@@ -76,8 +70,6 @@ const FinancialPerformanceChart = ({ id }: Props) => {
         });
 
         chart.timeScale().fitContent();
-
-        console.log(cashierData);
 
         totalSystemCostSeries.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d.totalSystemCost })));
         totalDailyRevenueSeries.setData(
