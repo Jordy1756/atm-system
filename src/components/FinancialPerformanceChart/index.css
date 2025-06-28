@@ -1,0 +1,48 @@
+.cashier__performance-chart {
+    padding: 1rem;
+    min-height: calc(100dvh - 83px);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cashier__performance-chart > div {
+    flex: 1;
+    position: relative;
+}
+
+.earnings {
+    background-color: #26a69a; /* color secundario */
+    border-radius: 4px; /* opcional: esquinas redondeadas */
+    display: inline-block;
+    min-width: 16px;
+    min-height: 16px;
+}
+
+.losses {
+    background-color: #e81f63; /* color primario */
+    border-radius: 4px; /* opcional: esquinas redondeadas */
+    display: inline-block;
+    min-width: 16px;
+    min-height: 16px;
+}
+
+.utilitys {
+    background-color: #27c6db; /* color terciario */
+    border-radius: 4px; /* opcional: esquinas redondeadas */
+    display: inline-block;
+    min-width: 16px;
+    min-height: 16px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.div1 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}

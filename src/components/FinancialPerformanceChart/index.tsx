@@ -90,6 +90,22 @@ const FinancialPerformanceChart = ({ id }: Props) => {
 
     return (
         <section id={id} className="cashier__performance-chart">
+            <header className="header">
+                <div className="div1">
+                    <span className="earnings"></span>
+                    <p>Ganancias</p>
+                </div>
+
+                <div className="div1">
+                    <span className="losses"></span>
+                    <p>Pérdidas</p>
+                </div>
+
+                <div className="div1">
+                    <span className="utilitys"></span>
+                    <p>Ganancias</p>
+                </div>
+            </header>
             <div ref={chartRef} />
         </section>
     );
