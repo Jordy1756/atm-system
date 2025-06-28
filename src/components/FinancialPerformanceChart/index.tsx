@@ -77,6 +77,8 @@ const FinancialPerformanceChart = ({ id }: Props) => {
 
         chart.timeScale().fitContent();
 
+        console.log(cashierData);
+
         series1.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d.totalSystemCost })));
         series2.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d.totalDailyRevenue })));
         series3.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d.dailyNetProfit })));
