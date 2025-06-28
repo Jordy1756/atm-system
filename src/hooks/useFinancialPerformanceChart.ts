@@ -12,12 +12,12 @@ export const useFinancialPerformanceChart = () => {
         const chart = createChart(chartRef.current, {
             layout: {
                 background: { type: ColorType.Solid, color: "#1a1a1a" },
-                textColor: "#ffffff",
+                textColor: "#fefeff",
             },
             width: chartRef.current.clientWidth,
             height: chartRef.current.clientHeight,
             grid: {
-                vertLines: { color: "#333" },
+                vertLines: { color: "#2b2b30" },
             },
             crosshair: {
                 horzLine: {
@@ -48,21 +48,30 @@ export const useFinancialPerformanceChart = () => {
                 timeVisible: false,
                 tickMarkFormatter: (time: any) => `${time} cajero${time > 1 ? "s" : ""}`,
             },
+            localization: {
+                priceFormatter: (price: number) => `$${price.toFixed(2)}`,
+            },
         });
 
         const totalSystemCostSeries = chart.addSeries(LineSeries, {
-            color: "#e81f63",
-            lineWidth: 1,
+            color: "#e41b29",
+            lastValueVisible: false,
+            lineWidth: 2,
+            priceLineVisible: false,
         });
 
         const totalDailyRevenueSeries = chart.addSeries(LineSeries, {
-            color: "#26a69a",
-            lineWidth: 1,
+            color: "#01C852",
+            lastValueVisible: false,
+            lineWidth: 2,
+            priceLineVisible: false,
         });
 
         const dailyNetProfitSeries = chart.addSeries(LineSeries, {
-            color: "#27c6db",
-            lineWidth: 1,
+            color: "#24C2D7",
+            lastValueVisible: false,
+            lineWidth: 2,
+            priceLineVisible: false,
         });
 
         chart.timeScale().fitContent();

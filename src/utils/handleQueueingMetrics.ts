@@ -58,7 +58,7 @@ export const calculateQueueingMetrics = ({
     // Costs and profits
     const totalWaitingCost = averageCustomersInQueue * waitingCostPerCustomerPerHour * dailyWorkingHours;
     const totalCashierCost = numberOfCashiers * costPerCashierPerHour * dailyWorkingHours;
-    const totalSystemCost = totalWaitingCost + totalCashierCost; //COSTO
+    const totalSystemCost = totalWaitingCost + totalCashierCost;
 
     const netProfitPerCustomer = averageSpendingPerPurchase * profitMarginPerSale;
     const customersServedPerDay = customerArrivalRate * dailyWorkingHours;

@@ -26,15 +26,15 @@
 }
 
 .cashier__financial-chart > .cashier__financial-chart-header > div > span.earnings {
-    background-color: var(--secondary-500);
+    background-color: var(--success-500);
 }
 
 .cashier__financial-chart > .cashier__financial-chart-header > div > span.losses {
-    background-color: var(--primary-500);
+    background-color: var(--error-500);
 }
 
 .cashier__financial-chart > .cashier__financial-chart-header > div > span.utilities {
-    background-color: var(--tertiary-500);
+    background-color: var(--info-500);
 }
 
 .cashier__financial-chart > div {

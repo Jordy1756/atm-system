@@ -23,7 +23,9 @@
     --neutral-900: #000101;
     --primary-500: #e81f63;
     --secondary-500: #26a69a;
-    --tertiary-500: #27C6DB;
+    --success-500: #01C852;
+    --error-500: #e41b29;
+    --info-500: #24C2D7;
     --border-radius-out: 5px;
     --border-radius-in: 2.5px;
 }

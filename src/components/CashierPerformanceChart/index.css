@@ -9,6 +9,7 @@
 .cashier__performance-chart > .cashier__performance-chart-header {
     display: flex;
     align-items: center;
+    gap: 2.5px;
     width: fit-content;
     padding: 2.5px;
     border: 1px solid var(--neutral-700);
@@ -27,6 +28,7 @@
 
 .cashier__performance-chart > .cashier__performance-chart-header > button:hover {
     background-color: var(--neutral-800);
+    border-radius: var(--border-radius-in);
 }
 
 .cashier__performance-chart > .cashier__performance-chart-header > button.active {

@@ -23,17 +23,20 @@ export const useCashierPerformanceChart = () => {
         const chart = createChart(chartRef.current, {
             layout: {
                 background: { type: ColorType.Solid, color: "#1a1a1a" },
-                textColor: "#ffffff",
+                textColor: "#fefeff",
             },
             width: chartRef.current.clientWidth,
             height: chartRef.current.clientHeight,
-            grid: { vertLines: { visible: false }, horzLines: { visible: false } },
+            grid: {
+                vertLines: { color: "#2b2b30" },
+                horzLines: { visible: false },
+            },
         });
 
         chart.applyOptions({
             rightPriceScale: { scaleMargins: { top: 0.3, bottom: 0.25 } },
             crosshair: {
-                horzLine: { visible: false, labelVisible: false },
+                // horzLine: { visible: false, labelVisible: false },
                 vertLine: { labelVisible: false },
             },
             timeScale: {
@@ -46,7 +49,9 @@ export const useCashierPerformanceChart = () => {
             topColor: "rgba(38, 166, 154, 0.28)",
             bottomColor: "rgba(38, 166, 154, 0.05)",
             lineColor: "rgba(38, 166, 154, 1)",
-            lineWidth: 1,
+            lastValueVisible: false,
+            lineWidth: 2,
+            priceLineVisible: false,
         });
 
         chart.subscribeCrosshairMove((param) => {
