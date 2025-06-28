@@ -6,7 +6,7 @@ const ChartTooltip = ({ title, value, cashiers, x, y, visible }: TooltipData) =>
 
     return (
         <div
-            className="chart-tooltip"
+            className="chart__tooltip"
             style={{
                 position: "absolute",
                 left: x,
@@ -14,9 +14,9 @@ const ChartTooltip = ({ title, value, cashiers, x, y, visible }: TooltipData) =>
                 zIndex: 1000,
             }}
         >
-            <div className="tooltip-title">{title}</div>
-            <div className="tooltip-value">{value.toFixed(2)}</div>
-            <div className="tooltip-cashiers">Cajeros: {cashiers}</div>
+            <h2 className="tooltip__title">{title}</h2>
+            <p className="tooltip__value">{value.toFixed(2)}</p>
+            <p className="tooltip__cashiers">Cajeros: {cashiers}</p>
         </div>
     );
 };

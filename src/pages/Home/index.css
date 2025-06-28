@@ -6,7 +6,7 @@
     padding: 1rem;
     z-index: 999;
     background-color: var(--neutral-900);
-    border-bottom: 1px solid #4a4a4a;
+    border-bottom: 1px solid var(--neutral-700);
 }
 
 .header > nav {
@@ -17,7 +17,7 @@
 
 .header > nav > h1 {
     font-size: var(--text-size-xlarge);
-    color: var(--primary-500);
+    color: var(--secondary-500);
 }
 
 .header > nav > ul {
@@ -31,7 +31,7 @@
 }
 
 .header > nav > ul > li > a:hover {
-    color: var(--primary-500);
+    color: var(--secondary-500);
 }
 
 .main {
@@ -55,5 +55,5 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    border-left: 1px solid #4a4a4a;
+    border-left: 1px solid var(--neutral-700);
 }
