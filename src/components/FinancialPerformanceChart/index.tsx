@@ -57,29 +57,33 @@ const FinancialPerformanceChart = ({ id }: Props) => {
             },
         });
 
-        const series1 = chart.addSeries(LineSeries, {
-            color: "rgba( 38, 166, 154, 1)",
+        const totalSystemCostSeries = chart.addSeries(LineSeries, {
+            color: "#e81f63",
             lineWidth: 1,
             crosshairMarkerVisible: false,
         });
 
-        const series2 = chart.addSeries(LineSeries, {
-            color: "rgba( 255, 99, 132, 1)",
+        const totalDailyRevenueSeries = chart.addSeries(LineSeries, {
+            color: "#26a69a",
             lineWidth: 1,
             crosshairMarkerVisible: false,
         });
 
-        const series3 = chart.addSeries(LineSeries, {
-            color: "rgba( 255, 159, 64, 1)",
+        const dailyNetProfitSeries = chart.addSeries(LineSeries, {
+            color: "#27c6db",
             lineWidth: 1,
             crosshairMarkerVisible: false,
         });
 
         chart.timeScale().fitContent();
 
-        series1.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d.totalSystemCost })));
-        series2.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d.totalDailyRevenue })));
-        series3.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d.dailyNetProfit })));
+        console.log(cashierData);
+
+        totalSystemCostSeries.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d.totalSystemCost })));
+        totalDailyRevenueSeries.setData(
+            cashierData.map((d) => ({ time: d.cashiers as any, value: d.totalDailyRevenue }))
+        );
+        dailyNetProfitSeries.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d.dailyNetProfit })));
 
         return () => {
             chart.remove();
@@ -88,6 +92,22 @@ const FinancialPerformanceChart = ({ id }: Props) => {
 
     return (
         <section id={id} className="cashier__performance-chart">
+            <header className="header">
+                <div className="div1">
+                    <span className="earnings"></span>
+                    <p>Ganancias</p>
+                </div>
+
+                <div className="div1">
+                    <span className="losses"></span>
+                    <p>Pérdidas</p>
+                </div>
+
+                <div className="div1">
+                    <span className="utilitys"></span>
+                    <p>Utilidades</p>
+                </div>
+            </header>
             <div ref={chartRef} />
         </section>
     );
