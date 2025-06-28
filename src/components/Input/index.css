@@ -34,7 +34,7 @@
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background: #4f46e5; /* color azul */
+    background: var(--primary-500);
     cursor: pointer;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
     transition: background-color 0.3s ease;
@@ -47,19 +47,11 @@
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background: #4f46e5;
+    background: var(--primary-500);
     cursor: pointer;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
     border: none;
     transition: background-color 0.3s ease;
-}
-
-/* Cambia el color del thumb al hacer hover */
-.input-range:hover::-webkit-slider-thumb {
-    background-color: #3730a3;
-}
-.input-range:hover::-moz-range-thumb {
-    background-color: #3730a3;
 }
 
 .input-value {

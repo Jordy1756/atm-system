@@ -12,7 +12,7 @@
 }
 
 .earnings {
-    background-color: #26a69a; /* color secundario */
+    background-color: var(--secondary-500); /* color secundario */
     border-radius: 4px; /* opcional: esquinas redondeadas */
     display: inline-block;
     min-width: 16px;
@@ -20,7 +20,7 @@
 }
 
 .losses {
-    background-color: #e81f63; /* color primario */
+    background-color: var(--primary-500); /* color primario */
     border-radius: 4px; /* opcional: esquinas redondeadas */
     display: inline-block;
     min-width: 16px;
@@ -28,7 +28,7 @@
 }
 
 .utilitys {
-    background-color: #27c6db; /* color terciario */
+    background-color: var(--tertiary-500); /* color terciario */
     border-radius: 4px; /* opcional: esquinas redondeadas */
     display: inline-block;
     min-width: 16px;
