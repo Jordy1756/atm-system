@@ -4,7 +4,7 @@
     flex-direction: column;
     gap: 0.5rem;
     padding: 1rem;
-    min-width: 140px;
+    min-width: 240px;
     background-color: rgba(26, 26, 26, 0.9);
     border: 1px solid var(--secondary-500);
     border-radius: var(--border-radius-out);

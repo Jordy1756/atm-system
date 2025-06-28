@@ -21,10 +21,7 @@ export const useFinancialPerformanceChart = () => {
             },
             crosshair: {
                 horzLine: {
-                    labelBackgroundColor: "red",
-                },
-                vertLine: {
-                    labelBackgroundColor: "red",
+                    labelBackgroundColor: "#26a69a",
                 },
             },
         });

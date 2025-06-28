@@ -9,7 +9,7 @@ export const useCashierPerformanceChart = () => {
     const seriesRef = useRef<ISeriesApi<"Area"> | null>(null);
     const { cashierData } = useCashier();
     const [tooltipData, setTooltipData] = useState<TooltipData>({
-        title: "Tiempo de espera promedio",
+        title: "M3Line Inc.",
         value: 0,
         cashiers: 0,
         visible: false,
@@ -87,7 +87,7 @@ export const useCashierPerformanceChart = () => {
         return () => chart.remove();
     }, [cashierData]);
 
-    const updateMetric = (dataKey: keyof (typeof cashierData)[0]) =>
+    const updateMetric = (dataKey: keyof (typeof cashierData)[0]) => 
         seriesRef.current?.setData(cashierData.map((d) => ({ time: d.cashiers as any, value: d[dataKey] as number })));
 
     return {
